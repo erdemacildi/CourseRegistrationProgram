@@ -1,12 +1,14 @@
 package erdemacildi;
 
+import java.util.ArrayList;
+
 public class Faculty {
 
     private int ID;
     private String name;
     private String surname;
     private String departmentName;
-    private AssignInfo[] assignInfoList;
+    private ArrayList<AssignInfo> assignInfoList = new ArrayList<>();
 
     public Faculty(int ID, String name, String surname, String departmentName) {
         this.ID = ID;
@@ -17,15 +19,31 @@ public class Faculty {
 
     public boolean withdrawAssignInfo (AssignInfo assignInfo){
         boolean check = false;
+        int e = 0;
+        for (AssignInfo a : assignInfoList){
+            if (a.getCourse().getName().equals(assignInfo.getCourse().getName())){
+                assignInfoList.remove(e);
+            }
+            e++;
+        }
         return check;
     }
 
     public void addAssignInfo(AssignInfo assignInfo){
-
+        assignInfoList.add(assignInfo);
     }
 
     public void printCourseList(){
-
+        int e = 0;
+        System.out.println("-------------------------------");
+        System.out.println("printCourseList METHOD OF STUDENT ->");
+        for (AssignInfo a : assignInfoList){
+            for (Student b : a.getCourse().getStudentList()){
+                System.out.print("STUDENT : " + b.getName() + " " + b.getSurname());
+                System.out.println("MAJOR : " + b.getMajor());
+            }
+            System.out.println("COURSE : " + a.getCourse().getName() + " STATUS : REQUEST " + a.getAssignResult());
+        }
     }
 
     public int getID() {
@@ -60,11 +78,11 @@ public class Faculty {
         this.departmentName = departmentName;
     }
 
-    public AssignInfo[] getAssignInfoList() {
+    public ArrayList<AssignInfo> getAssignInfoList() {
         return assignInfoList;
     }
 
-    public void setAssignInfoList(AssignInfo[] assignInfoList) {
+    public void setAssignInfoList(ArrayList<AssignInfo> assignInfoList) {
         this.assignInfoList = assignInfoList;
     }
 }

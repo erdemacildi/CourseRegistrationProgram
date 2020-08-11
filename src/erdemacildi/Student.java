@@ -8,7 +8,7 @@ public class Student {
     private String major;
     private int ID;
     private int year;
-    private ArrayList<RegisterInfo> registerList;
+    private ArrayList<RegisterInfo> registerList = new ArrayList<>();
 
     public Student(String name, String surname, String major, int ID, int year) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Student {
     }
 
     public void addRegisterInfo (RegisterInfo registerInfo ){
-        registerList.add(registerInfo);
+        this.registerList.add(registerInfo);
     }
 
     public boolean removeRegisterInfo(Course course){
@@ -35,9 +35,10 @@ public class Student {
     }
 
     public void printCourseList(){
+        System.out.println("-------------------------------------------------------------");
         System.out.println("printCourseList METHOD OF STUDENT ->");
         System.out.print("STUDENT : " + this.name + " " + this.surname);
-        System.out.println("MAJOR : " + this.major);
+        System.out.println(" MAJOR : " + this.major);
         for (RegisterInfo a : registerList)
             System.out.println("\tCOURSE : " + a.getCourse().getName() + " STATUS : " + a.getResult());
 
@@ -91,5 +92,13 @@ public class Student {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public ArrayList<RegisterInfo> getRegisterList() {
+        return registerList;
+    }
+
+    public void setRegisterList(ArrayList<RegisterInfo> registerList) {
+        this.registerList = registerList;
     }
 }
